@@ -2,7 +2,8 @@ package main
 
 import "fmt"
 
-func main()  {
+// En carpeta solo puede tenEr un solo archivo main pricipal en GO
+func HolaMUndo()  {
 	fmt.Println("Hola Mundo en GO")
 	fmt.Println(" ")
 	fmt.Println(8+10)
