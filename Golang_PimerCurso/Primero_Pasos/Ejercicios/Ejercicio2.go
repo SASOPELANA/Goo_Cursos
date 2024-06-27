@@ -14,11 +14,11 @@ package main
 import "fmt"
 
 // Esto es una mala practica, solo se debe aplicar en un caso espesifico. Declarar variables globales.
-var edad int
-var nombre string
-var bandera bool
+//var edad int
+//var nombre string
+//var bandera bool
 
-func main() {
+func ejercicio2() {
 
 	fmt.Println(edad, nombre, bandera)
 

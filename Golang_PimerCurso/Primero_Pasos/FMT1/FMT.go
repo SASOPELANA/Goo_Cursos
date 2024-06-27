@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func fmtUno() {
 	/*
 	var edad = 35
 	fmt.Println(edad)

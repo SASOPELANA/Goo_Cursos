@@ -19,7 +19,7 @@ package main
 
 import "fmt"
 
-func main() {
+func Ejercicio1() {
 	nombre := "Sergio"
 	edad := 35
 	curso := "Si me gusta el curso"
