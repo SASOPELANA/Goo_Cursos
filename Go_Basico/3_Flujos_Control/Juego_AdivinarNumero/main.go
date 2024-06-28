@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -23,17 +24,17 @@ func Jugar() {
 
 	for intentos < maxIntentos {
 		intentos++
-		fmt.Printf("Ingrese un número (intentos restantes: %d): ", maxIntentos - intentos + 1)
+		color.Cyan("Ingrese un número (intentos restantes: %d): ", maxIntentos - intentos + 1)
 		fmt.Scan(&numIngresado)
 
 		if numIngresado == numAleatorio {
-			fmt.Println("Felicitaciones! Has ganado! Advinaste el número!")
+			color.Red("Felicitaciones! Has ganado! Advinaste el número!")
 			JugarNuevamente()
             return // Para que salga del for
 		} else if numIngresado < numAleatorio {
-			fmt.Println("El número a adivinar es mayor.")
+			color.Green("El número a adivinar es mayor.")
 		} else if numIngresado > numAleatorio {
-			fmt.Println("El número a adivinar es menor.")
+			color.Yellow("El número a adivinar es menor.")
 		}
 	}
 
@@ -43,14 +44,14 @@ func Jugar() {
 
 func JugarNuevamente(){
 	var eleccion string
-	fmt.Println("¿Desea jugar? (S/N): ")
+	color.Magenta("¿Desea jugar? (S/N): ")
 	fmt.Scan(&eleccion)
 
 	if eleccion == "S" || eleccion == "s" {
 		limpiarConsola()
         Jugar()
     } else if eleccion == "N" || eleccion == "n" {
-        fmt.Println("Gracias por jugar!")
+        color.Magenta("Gracias por jugar!")
     } else{
 		fmt.Println("Opción inválida. Intente nuevamente.")
 		JugarNuevamente()
@@ -60,23 +61,23 @@ func JugarNuevamente(){
 
 func verMenu() {
 	limpiarConsola()
-	fmt.Print("\n----------------------------------------------------------------\n")
-	fmt.Println("\n                 ********   MENÚ  *********")
-	fmt.Print("\n----------------------------------------------------------------\n")
+	color.Blue("\n----------------------------------------------------------------\n")
+	color.Cyan("\n                 ********   MENÚ  *********")
+	color.Blue("\n----------------------------------------------------------------\n")
 
-	fmt.Println("\n        ♥   ♥   ♥  --- REGLAS DEL JUEGO ---  ♥   ♥   ♥     ")
-	fmt.Println("\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔")
-	fmt.Println("\n El juego consite en adivinar un número aleatorio del 1 al 100.")
-	fmt.Println(" Tiene hasta diez intentos. De no adivinar, pierde el juego.")
-	fmt.Println("\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔")
+	color.Red("\n        ♥   ♥   ♥  --- REGLAS DEL JUEGO ---  ♥   ♥   ♥     ")
+	color.Green("\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔")
+	color.Yellow("\n El juego consite en adivinar un número aleatorio del 1 al 100.")
+	color.Yellow(" Tiene hasta diez intentos. De no adivinar, pierde el juego.")
+	color.Green("\n↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔↔")
 	fmt.Println("\n ")
 
-	fmt.Println("1. Jugar")
-	fmt.Println("2. Creditos")
+	color.Magenta("1. Jugar")
+	color.Green("2. Creditos")
 
 	var eleccion int
 
-	fmt.Print("Ingrese su elección (1/2): ")
+	color.Yellow("Ingrese su elección (1/2): ")
 	fmt.Scan(&eleccion)
 	switch eleccion {
 		case 1:
@@ -114,8 +115,9 @@ func limpiarConsola() {
 
 func Creditos(){
 	limpiarConsola()
-	fmt.Print("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n ")
-	fmt.Println("\n   Programador: Sergio Alejandro Sopelana")
-	fmt.Print("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n ")
+	hiCyan := color.New(color.FgHiCyan)
+	color.Green("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n ")
+	hiCyan.Println("   Programador: Sergio Alejandro Sopelana")
+	color.Green("\n°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°\n ")
 	JugarNuevamente()
 }
