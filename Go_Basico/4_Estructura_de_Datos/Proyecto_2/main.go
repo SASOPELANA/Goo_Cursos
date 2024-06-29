@@ -108,6 +108,10 @@ func main() {
 			fmt.Println(bgYellow+"Tarea eliminada correctamente."+reset)
 		case 5:
 			fmt.Println(bgGreen+"Saliendo del programa."+reset)
+			fmt.Println(" ")
+			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §"+reset)
+			fmt.Println(bgRed+"  ↓ °°° PROGRAMADOR: SERGIO ALEJANDRO SOPELANA °°° ↑  "+reset)
+			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §\n"+reset)
             return	
 		default:
 			fmt.Println( bgBlue + "Opcion Inválida." + reset)
