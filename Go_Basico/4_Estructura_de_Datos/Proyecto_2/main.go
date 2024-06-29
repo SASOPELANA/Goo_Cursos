@@ -56,6 +56,7 @@ func main() {
 		bgBlue := "\x1b[44m"
 		bgYellow := "\x1b[43m"
 		bgWhite := "\x1b[47m"
+		bgLightCyan := "\x1b[106m"
 		reset := "\x1b[0m"
 		bgMagenta := "\x1b[45m"
 
@@ -112,6 +113,17 @@ func main() {
 			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §"+reset)
 			fmt.Println(bgRed+"  ↓ °°° PROGRAMADOR: SERGIO ALEJANDRO SOPELANA °°° ↑  "+reset)
 			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §\n"+reset)
+			fmt.Println(" ")
+			fmt.Println(bgLightCyan,"                               ",reset)
+			fmt.Println(bgLightCyan,"                               ",reset)
+			fmt.Println(bgWhite,"                               ",reset)
+			fmt.Println(bgWhite,"                               ",reset)
+			fmt.Println(bgLightCyan,"                               ",reset)
+			fmt.Println(bgLightCyan,"                               ",reset)
+			fmt.Println(" ")
+
+
+
             return	
 		default:
 			fmt.Println( bgBlue + "Opcion Inválida." + reset)
