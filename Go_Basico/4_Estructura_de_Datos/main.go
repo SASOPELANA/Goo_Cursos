@@ -5,13 +5,10 @@ import (
 )
 
 func main() {
-	// vectorMatriz()
+	vectorMatriz()
 	Rebana()
-	
-
-
+	Mapas() 
 }
-
 
 func vectorMatriz(){
 	var a = [...]int{30, 40, 50, 60, 80, 80}
@@ -84,3 +81,47 @@ func Rebana(){
 	fmt.Println("",rebanada2)
 	fmt.Println(copy(rebanada2, rebanada1)) // Muestra cuantos elementos se copiaron.
 }
+
+
+
+func Mapas(){
+	colores := map[string]string{
+		"rojo": "#FF0000",
+		"verde": "#00FF00",
+		"azul": "#0000FF",
+	}
+
+	fmt.Println(colores["rojo"])
+	colores["negro"] = "#000000"
+
+	fmt.Println(colores)
+	valor, ok := colores["verde"]
+
+	if ok {
+		fmt.Println("Si existe la clave")
+	}else{
+		fmt.Println("No existe la clave")
+	}
+	fmt.Println(valor)
+
+	valor, ok = colores["blnaco"]
+	if ok {
+		fmt.Println("Si existe la clave")
+	}else{
+		fmt.Println("No existe la clave")
+	}
+	fmt.Println(valor)
+
+	// Eliminar elemnto del mapa. Funcion -->     delete()
+	delete(colores, "rojo")
+	fmt.Println(colores)
+
+	fmt.Println(" ")
+
+	// Iterar elementos de un mapa
+	for clave, valor := range colores {
+		fmt.Printf("Clave: %s, Valor: %s\n", clave, valor)
+	}
+}
+
+
