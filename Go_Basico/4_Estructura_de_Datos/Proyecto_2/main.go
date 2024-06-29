@@ -49,68 +49,78 @@ func main() {
 	// Instancia de bufio para entrada de datos
 	leer := bufio.NewReader(os.Stdin)
 	for {
+		// Definimos los colores para el fondo de la consola
+		bgGreen := "\x1b[42m"
+		bgCyan := "\x1b[46m"
+		bgRed := "\x1b[41m"
+		bgBlue := "\x1b[44m"
+		bgYellow := "\x1b[43m"
+		bgWhite := "\x1b[47m"
+		reset := "\x1b[0m"
+		bgMagenta := "\x1b[45m"
+
 		var opcion int
-		fmt.Println("Seleccione una opción:\n",
+		fmt.Println(bgBlue + "Seleccione una opción:\n",
 			"1. Agregar tarea\n",
 			"2. Marcar tarea como completada\n",
 			"3. Editar tarea\n",
 	    	"4. Eliminar tarea\n",	
-			"5. Salir")
+			"5. Salir" + reset)
 
-		fmt.Print("Ingrese una opción: ")
+		fmt.Print( bgGreen+ "Ingrese una opción: " + reset)
 		fmt.Scanln(&opcion)
 
 		switch opcion {
         case 1:
 			var t Tarea
-            fmt.Print("Ingrese el nombre de la tarea: ")
+            fmt.Print(bgCyan+"Ingrese el nombre de la tarea: "+reset)
             t.nombre, _ = leer.ReadString('\n')
 			t.nombre = strings.TrimSpace(t.nombre)
-            fmt.Print("Ingrese la descripción de la tarea: ")
+            fmt.Print(bgCyan+"Ingrese la descripción de la tarea: "+reset)
 			t.descripcion, _ = leer.ReadString('\n')
 			t.descripcion = strings.TrimSpace(t.descripcion)
 			lista.agregarTarea(t)
-			fmt.Println("Tarea agregada correctamente.")
+			fmt.Println(bgWhite+"Tarea agregada correctamente."+reset)
 		case 2:
 			var index int
-			fmt.Print("Ingrese el índice de la tarea que desea marcar como completada: ")
+			fmt.Print(bgMagenta+"Ingrese el índice de la tarea que desea marcar como completada: "+reset)
 			fmt.Scanln(&index)
 			lista.marcarCompletado(index)
-			fmt.Println("Tarea marcada como completada correctamente.")
+			fmt.Println(bgMagenta+"Tarea marcada como completada correctamente."+reset)
 		case 3:	
 			var index int
 			var t Tarea
-			fmt.Print("Ingrese el indice de la tarea que desea actualizar:")
+			fmt.Print(bgWhite+"Ingrese el indice de la tarea que desea actualizar:"+reset)
 			fmt.Scanln(&index)
-			fmt.Print("Ingrese el nombre de la tarea: ")
+			fmt.Print(bgWhite+"Ingrese el nombre de la tarea: "+reset)
             t.nombre, _ = leer.ReadString('\n')
 			t.nombre = strings.TrimSpace(t.nombre)
-            fmt.Print("Ingrese la descripción de la tarea: ")
+            fmt.Print(bgWhite+"Ingrese la descripción de la tarea: "+reset)
 			t.descripcion, _ = leer.ReadString('\n')
 			t.descripcion = strings.TrimSpace(t.descripcion)
 			lista.editarTarea(index, t)
-			fmt.Println("Tarea actualizado correctamente.")
+			fmt.Println(bgYellow+"Tarea actualizado correctamente."+reset)
 		case 4:
 			var index int
-			fmt.Print("Ingrese el índice de la tarea que desea eliminar: ")
+			fmt.Print(bgRed+"Ingrese el índice de la tarea que desea eliminar: "+reset)
 			fmt.Scanln(&index)
 			lista.eliminarTarea(index)
-			fmt.Println("Tarea eliminada correctamente.")
+			fmt.Println(bgYellow+"Tarea eliminada correctamente."+reset)
 		case 5:
-			fmt.Println("Saliendo del programa.")
+			fmt.Println(bgGreen+"Saliendo del programa."+reset)
             return	
 		default:
-			fmt.Println("Opcion Inválida.")
+			fmt.Println( bgBlue + "Opcion Inválida." + reset)
 		}
 
 		
 		// Listar todas las tareas
-		fmt.Println("Lista de Tareas:")
-		fmt.Println("====================================================================================")
+		fmt.Println(bgRed+"Lista de Tareas:"+reset)
+		fmt.Println(bgRed + "====================================================================================" + reset)
 		for i, t := range lista.tareas {
-		fmt.Printf("%d. %s - %s - Completado: %t\n", i, t.nombre, t.descripcion, t.completado)
+		fmt.Printf( bgYellow + "%d. %s - %s - Completado: %t\n" + reset, i, t.nombre, t.descripcion, t.completado)
 		} 
-		fmt.Println("====================================================================================")	
+		fmt.Println( bgRed + "====================================================================================" + reset)	
 
 	}
 
