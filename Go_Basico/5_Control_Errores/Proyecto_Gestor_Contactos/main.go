@@ -52,6 +52,16 @@ func loadContactsFromFile(contacts *[]Contact) error {
 
 }
 
+// Eliminar contacto por índice
+func deleteContact(contacts *[]Contact, index int) error {
+    if index < 0 || index >= len(*contacts) {
+        return fmt.Errorf("índice fuera de rango")
+    }
+    *contacts = append((*contacts)[:index], (*contacts)[index+1:]...)
+    return nil
+}
+
+
 
 func main() {
     // Slice de contactos
@@ -71,7 +81,8 @@ func main() {
         fmt.Print("==== GESTOR DE CONTACTOS ====\n",
         "1. Agregar un contacto\n",
         "2. Mostrar todos los contactos\n",
-        "3. Salir\n",
+        "3. Eliminar un contacto\n",
+        "4. Salir\n",
         "Elige una opción: ")
 
         // Leer la opcion del usuario  
@@ -94,6 +105,11 @@ func main() {
             fmt.Print("Teléfono: ")
             c.Phone, _ = reader.ReadString('\n')
 
+            // Limpiar caracteres de nueva línea
+            c.Name = c.Name[:len(c.Name)-1]
+            c.Email = c.Email[:len(c.Email)-1]
+            c.Phone = c.Phone[:len(c.Phone)-1]
+            
             // Agregar un contacto a Slice
             contacts = append(contacts, c)
 
@@ -112,6 +128,31 @@ func main() {
             fmt.Println("===============================================================")
 
         case 3:
+            // Eliminar un contacto
+            fmt.Print("Ingrese el número del contacto que desea eliminar: ")
+            var index int
+            _, err := fmt.Scanf("%d\n", &index)
+            if err != nil {
+                fmt.Println("Error al leer el número:", err)
+                continue
+            }
+
+            index-- // Ajustar a índice 0 basado
+
+            if err := deleteContact(&contacts, index); err != nil {
+                fmt.Println("Error al eliminar el contacto:", err)
+                continue
+            }
+
+            // Guardar la lista actualizada de contactos
+            if err := saveContactsFile(contacts); err != nil {
+                fmt.Println("Error al guardar los contactos:", err)
+            } else {
+                fmt.Println("Contacto eliminado exitosamente.")
+            }
+
+
+        case 4:
             // Salir del programa
             fmt.Println(" ")
             fmt.Println("===================================================================")
