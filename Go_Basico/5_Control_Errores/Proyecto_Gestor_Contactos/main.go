@@ -6,6 +6,7 @@ import (
       "bufio"
       "encoding/json"
       "os"
+      "github.com/fatih/color"
 )
 
 // Estructura de contatos
@@ -76,20 +77,30 @@ func main() {
     // Crear instancia de fubio
     reader := bufio.NewReader(os.Stdin)
 
+      // Crear funciones de color
+      red := color.New(color.FgRed).SprintFunc()
+      green := color.New(color.FgGreen).SprintFunc()
+      blue := color.New(color.FgBlue).SprintFunc()
+      yellow := color.New(color.FgYellow).SprintFunc()
+      cyan := color.New(color.FgCyan).SprintFunc()
+      magenta := color.New(color.FgMagenta).SprintFunc()
+      white := color.New(color.FgWhite).SprintFunc()
+
     for {
         // Mostrar opciones al usuario
-        fmt.Print("==== GESTOR DE CONTACTOS ====\n",
+        fmt.Println(" ")
+        fmt.Print(green(" ===== GESTOR DE CONTACTOS =====    \n",
         "1. Agregar un contacto\n",
         "2. Mostrar todos los contactos\n",
         "3. Eliminar un contacto\n",
         "4. Salir\n",
-        "Elige una opción: ")
+        "Elige una opción: "))
 
         // Leer la opcion del usuario  
         var option int 
         _, err = fmt.Scanln(&option)
         if err != nil {
-          fmt.Println("Error al lerr la opción:", err)
+          fmt.Println(red("Error al lerr la opción:", err))
           return
         }
 
@@ -98,11 +109,11 @@ func main() {
         case 1:
             // Ingresar y crear contacto
             var c Contact
-            fmt.Print("Nombre: ")
+            fmt.Print(blue("Nombre: "))
             c.Name, _ = reader.ReadString('\n')
-            fmt.Print("Email: ")
+            fmt.Print(blue("Email: "))
             c.Email, _ = reader.ReadString('\n')
-            fmt.Print("Teléfono: ")
+            fmt.Print(blue("Teléfono: "))
             c.Phone, _ = reader.ReadString('\n')
 
             // Limpiar caracteres de nueva línea
@@ -115,25 +126,25 @@ func main() {
 
             // Guardar en un archivo json
             if err := saveContactsFile(contacts); err != nil {
-              fmt.Println("Error al guardar el contacto: ", err)
+              fmt.Println(magenta("Error al guardar el contacto: ", err))
             }
 
         case 2:
             // Mostrar todos los Contactos
-            fmt.Println("===============================================================")
+            fmt.Println(yellow("==============================================================="))
             for index, contact := range contacts {
               fmt.Printf("%d. Nombre: %s Email: %s Teléfono: %s\n",
                   index + 1, contact.Name, contact.Email, contact.Phone)
             }
-            fmt.Println("===============================================================")
+            fmt.Println(yellow("==============================================================="))
 
         case 3:
             // Eliminar un contacto
-            fmt.Print("Ingrese el número del contacto que desea eliminar: ")
+            fmt.Print(magenta("Ingrese el número del contacto que desea eliminar: "))
             var index int
             _, err := fmt.Scanf("%d\n", &index)
             if err != nil {
-                fmt.Println("Error al leer el número:", err)
+                fmt.Println(red("Error al leer el número:", err))
                 continue
             }
 
@@ -146,23 +157,23 @@ func main() {
 
             // Guardar la lista actualizada de contactos
             if err := saveContactsFile(contacts); err != nil {
-                fmt.Println("Error al guardar los contactos:", err)
+                fmt.Println(white("Error al guardar los contactos:", err))
             } else {
-                fmt.Println("Contacto eliminado exitosamente.")
+                fmt.Println(white("Contacto eliminado exitosamente."))
             }
 
 
         case 4:
             // Salir del programa
             fmt.Println(" ")
-            fmt.Println("===================================================================")
-            fmt.Println("              Programador Sergio Alejandro Sopelana")
-            fmt.Println("===================================================================")
+            fmt.Println(cyan("==================================================================="))
+            fmt.Println(white("              Programador Sergio Alejandro Sopelana"))
+            fmt.Println(cyan("==================================================================="))
             
             return
 
         default:
-            fmt.Println("Opción no válida")
+            fmt.Println(green("Opción no válida"))
 
         }
     }
