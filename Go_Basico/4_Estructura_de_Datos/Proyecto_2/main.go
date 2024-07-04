@@ -5,6 +5,7 @@ import (
 	"os"
 	"bufio"
 	"strings"
+	"github.com/fatih/color"
 ) 
 
 // Estructura Tares
@@ -49,94 +50,93 @@ func main() {
 	// Instancia de bufio para entrada de datos
 	leer := bufio.NewReader(os.Stdin)
 	for {
-		// Definimos los colores para el fondo de la consola
-		bgGreen := "\x1b[42m"
-		bgCyan := "\x1b[46m"
-		bgRed := "\x1b[41m"
-		bgBlue := "\x1b[44m"
-		bgYellow := "\x1b[43m"
-		bgWhite := "\x1b[47m"
-		bgLightCyan := "\x1b[106m"
-		reset := "\x1b[0m"
-		bgMagenta := "\x1b[45m"
+
+		// Crear funciones de color
+		red := color.New(color.FgRed).SprintFunc()
+		green := color.New(color.FgGreen).SprintFunc()
+		blue := color.New(color.FgBlue).SprintFunc()
+		yellow := color.New(color.FgYellow).SprintFunc()
+		cyan := color.New(color.FgCyan).SprintFunc()
+		magenta := color.New(color.FgMagenta).SprintFunc()
+		white := color.New(color.FgWhite).SprintFunc()
 
 		var opcion int
-		fmt.Println(bgBlue + "Seleccione una opción:\n",
+		fmt.Println(blue("Seleccione una opción:\n",
 			"1. Agregar tarea\n",
 			"2. Marcar tarea como completada\n",
 			"3. Editar tarea\n",
 	    	"4. Eliminar tarea\n",	
-			"5. Salir" + reset)
+			"5. Salir"))
 
-		fmt.Print( bgGreen+ "Ingrese una opción: " + reset)
+		fmt.Print(red("Ingrese una opción: "))
 		fmt.Scanln(&opcion)
 
 		switch opcion {
         case 1:
 			var t Tarea
-            fmt.Print(bgCyan+"Ingrese el nombre de la tarea: "+reset)
+            fmt.Print(cyan("Ingrese el nombre de la tarea: "))
             t.nombre, _ = leer.ReadString('\n')
 			t.nombre = strings.TrimSpace(t.nombre)
-            fmt.Print(bgCyan+"Ingrese la descripción de la tarea: "+reset)
+            fmt.Print(cyan("Ingrese la descripción de la tarea: "))
 			t.descripcion, _ = leer.ReadString('\n')
 			t.descripcion = strings.TrimSpace(t.descripcion)
 			lista.agregarTarea(t)
-			fmt.Println(bgWhite+"Tarea agregada correctamente."+reset)
+			fmt.Println(white("Tarea agregada correctamente."))
 		case 2:
 			var index int
-			fmt.Print(bgMagenta+"Ingrese el índice de la tarea que desea marcar como completada: "+reset)
+			fmt.Print(magenta("Ingrese el índice de la tarea que desea marcar como completada: "))
 			fmt.Scanln(&index)
 			lista.marcarCompletado(index)
-			fmt.Println(bgMagenta+"Tarea marcada como completada correctamente."+reset)
+			fmt.Println(magenta("Tarea marcada como completada correctamente."))
 		case 3:	
 			var index int
 			var t Tarea
-			fmt.Print(bgWhite+"Ingrese el indice de la tarea que desea actualizar:"+reset)
+			fmt.Print(white("Ingrese el indice de la tarea que desea actualizar:"))
 			fmt.Scanln(&index)
-			fmt.Print(bgWhite+"Ingrese el nombre de la tarea: "+reset)
+			fmt.Print(white("Ingrese el nombre de la tarea: "))
             t.nombre, _ = leer.ReadString('\n')
 			t.nombre = strings.TrimSpace(t.nombre)
-            fmt.Print(bgWhite+"Ingrese la descripción de la tarea: "+reset)
+            fmt.Print(white("Ingrese la descripción de la tarea: "))
 			t.descripcion, _ = leer.ReadString('\n')
 			t.descripcion = strings.TrimSpace(t.descripcion)
 			lista.editarTarea(index, t)
-			fmt.Println(bgYellow+"Tarea actualizado correctamente."+reset)
+			fmt.Println(yellow("Tarea actualizado correctamente."))
 		case 4:
 			var index int
-			fmt.Print(bgRed+"Ingrese el índice de la tarea que desea eliminar: "+reset)
+			fmt.Print(red("Ingrese el índice de la tarea que desea eliminar: "))
 			fmt.Scanln(&index)
 			lista.eliminarTarea(index)
-			fmt.Println(bgYellow+"Tarea eliminada correctamente."+reset)
+			fmt.Println(yellow("Tarea eliminada correctamente."))
 		case 5:
-			fmt.Println(bgGreen+"Saliendo del programa."+reset)
+			fmt.Println(green("Saliendo del programa."))
 			fmt.Println(" ")
-			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §"+reset)
-			fmt.Println(bgRed+"  ↓ °°° PROGRAMADOR: SERGIO ALEJANDRO SOPELANA °°° ↑  "+reset)
-			fmt.Println(bgCyan+"§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §\n"+reset)
+			fmt.Println(cyan("§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §"))
+			fmt.Println(red("  ↓ °°° PROGRAMADOR: SERGIO ALEJANDRO SOPELANA °°° ↑  "))
+			fmt.Println(cyan("§ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ §\n"))
 			fmt.Println(" ")
-			fmt.Println(bgLightCyan,"                               ",reset)
-			fmt.Println(bgLightCyan,"                               ",reset)
-			fmt.Println(bgWhite,"                               ",reset)
-			fmt.Println(bgWhite,"                               ",reset)
-			fmt.Println(bgLightCyan,"                               ",reset)
-			fmt.Println(bgLightCyan,"                               ",reset)
+			fmt.Println(cyan("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
+			fmt.Println(cyan("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
+			fmt.Println(white("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
+			fmt.Println(white("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
+			fmt.Println(cyan("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
+			fmt.Println(cyan("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"))
 			fmt.Println(" ")
 
 
 
             return	
 		default:
-			fmt.Println( bgBlue + "Opcion Inválida." + reset)
+			fmt.Println(blue("Opcion Inválida."))
 		}
 
 		
 		// Listar todas las tareas
-		fmt.Println(bgRed+"Lista de Tareas:"+reset)
-		fmt.Println(bgRed + "====================================================================================" + reset)
+		fmt.Println(red("Lista de Tareas:"))
+		fmt.Println(red("===================================================================================="))
 		for i, t := range lista.tareas {
-		fmt.Printf( bgYellow + "%d. %s - %s - Completado: %t\n" + reset, i, t.nombre, t.descripcion, t.completado)
+		fmt.Printf( yellow("%d. %s - %s - Completado: %t\n"), i, t.nombre, t.descripcion, t.completado)
 		} 
-		fmt.Println( bgRed + "====================================================================================" + reset)	
+		fmt.Println( red("===================================================================================="))	
 
 	}
 
