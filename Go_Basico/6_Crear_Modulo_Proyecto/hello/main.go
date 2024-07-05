@@ -12,10 +12,16 @@ func main() {
 	log.SetPrefix("Mi_Modulo: ")
 	log.SetFlags(0)
 
-	message, err := Mi_Modulo.Hello("")
+	names := []string{"Sergio", "Juan", "Roberto"}
+	messages, err := Mi_Modulo.Hellos(names)
 	if err != nil {
 		log.Fatal(err)
-	}
-	fmt.Println(message)
+    }
+
+	//message, err := Mi_Modulo.Hello("Sergio")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	fmt.Println(messages)
 
 }
